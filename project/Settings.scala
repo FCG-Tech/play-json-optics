@@ -1,12 +1,18 @@
 import sbt._
 import Keys._
 import sbtassembly.AssemblyPlugin.autoImport._
-import bintray.BintrayKeys._
+import sbtghpackages.GitHubPackagesKeys._
+import sbtghpackages.TokenSource
 
 object Settings {
+  val githubTokenSourceSetting =
+    githubTokenSource := TokenSource.GitConfig("github.token") || TokenSource.Environment("GITHUB_TOKEN")
 
   lazy val settings = Seq(
-    organization := "nl.vroste",
+    organization := "rat",
+    githubOwner := "FCG-Tech",
+    githubRepository := "play-json-optics",
+    githubTokenSourceSetting,
     version := "0.2.0." + sys.props.getOrElse("buildNumber", default="0"),
     scalaVersion := "2.13.1",
     crossScalaVersions := Seq("2.12.10", scalaVersion.value),
@@ -31,9 +37,6 @@ object Settings {
     ),
     scalacOptions ++= Seq("-language:higherKinds"),
     addCompilerPlugin("org.typelevel" % "kind-projector" % "0.11.3" cross CrossVersion.full),
-    bintrayOrganization := Some("vroste"),
-    bintrayReleaseOnPublish in ThisBuild := false,
-    bintrayPackageLabels := Seq("play-framework", "play-json", "optics"),
     licenses += ("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-2.0.txt"))
   )
 
