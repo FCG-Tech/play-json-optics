@@ -1,9 +1,8 @@
 
-[![Bintray](https://img.shields.io/bintray/v/vroste/maven/play-json-optics?label=latest)](https://bintray.com/vroste/maven/play-json-optics/_latestVersion)
-[![CircleCI](https://circleci.com/gh/svroonland/play-json-optics.svg?style=svg)](https://circleci.com/gh/svroonland/play-json-optics)
-
 # play-json-optics
 Monocle optics for Play! JSON data types. 
+
+Had to fork this and republish this on FCG github packages due to the [sunset of bintray](https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/).
 
 ## About 
 This libary allows easy creation of complex, composable JSON-to-JSON transformations with `play-json`.
@@ -28,9 +27,15 @@ Optics to any path within a JSON data structure can be expressed using `play-jso
 Add the following to your build.sbt:
 
 ```
-resolvers += Resolver.bintrayRepo("vroste", "maven"),
-libraryDependencies += "nl.vroste" %% "play-json-optics" % "0.2.0.0"
+resolvers += Resolver.githubPackages("FCG-Tech"),
+libraryDependencies += "rat" %% "play-json-optics" % "0.2.0.0"
 ```
+together with 
+```
+// https://github.com/djspiewak/sbt-github-packages
+addSbtPlugin("com.codecommit" % "sbt-github-packages" % "0.5.2")
+```
+
 
 ## Version compatibility
 
